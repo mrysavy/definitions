@@ -1,0 +1,11 @@
+FROM fedora:24
+
+RUN dnf install -y \
+      rpm-build rpmdevtools rpmspectool \
+      mock mock-scm \
+      vim less \
+    && dnf clean all
+
+VOLUME ["/root/rpmbuild"]
+ENTRYPOINT ["/bin/bash"]
+

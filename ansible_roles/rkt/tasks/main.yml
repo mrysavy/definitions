@@ -1,0 +1,15 @@
+---
+- name: Check if installed
+  command: rpm -q rkt-1.16.0-1.x86_64
+  register: rpm_check
+  ignore_errors: true
+  changed_when: no
+  failed_when: false
+- name: Rkt package
+  yum: name=https://github.com/coreos/rkt/releases/download/v1.16.0/rkt-1.16.0-1.x86_64.rpm state=present
+  when: rpm_check.rc == 1
+- name: Enable and start Rkt Garbage Collector
+  service: name=rkt-gc.timer state=started enabled=true
+- name: Enable and start Rkt Metadata Service
+  service: name=rkt-metadata.socket state=started enabled=true
+

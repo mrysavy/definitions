@@ -1,0 +1,11 @@
+---
+- name: Python PIP
+  yum: name=python-pip state=present
+- name: Python requirements
+  pip: name={{item}} state=latest
+  with_items:
+    - setuptools
+    - pip
+- name: Ansible-container
+  pip: name=ansible-container state=present
+

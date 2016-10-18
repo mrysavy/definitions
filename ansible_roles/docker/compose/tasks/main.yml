@@ -1,0 +1,10 @@
+---
+- name: Download docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    checksum: "sha256:d9c19bfd39ccd8bf7168c2afefb6a2cbd77d299c4d61531a220f6803ec6b701a"
+    mode: 755
+- name: Symlink docker-compose
+  file: state=link src=/usr/local/bin/docker-compose dest=/usr/local/sbin/docker-compose
+

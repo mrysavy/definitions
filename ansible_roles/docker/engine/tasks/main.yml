@@ -1,0 +1,14 @@
+---
+- name: Docker Repository
+  yum_repository:
+    name: dockerrepo
+    description: Docker Repository
+    baseurl: https://yum.dockerproject.org/repo/main/centos/7/
+    gpgkey: https://yum.dockerproject.org/gpg
+- name: Docker engine
+  yum: name={{item}} state=present
+  with_items:
+  - docker-engine
+- name: Enable and start Docker service
+  service: name=docker.service state=started enabled=true
+
